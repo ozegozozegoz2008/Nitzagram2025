@@ -116,7 +116,7 @@ def center_text(num_of_rows, text_to_display, row_number):
     return text_rect
 
 
-def text_display(text, size, pos, BLACK, font_name='chalkduster.ttf'):
+def text_display(text, size, pos, font_name='chalkduster.ttf'):
     font = pygame.font.SysFont(font_name, size)
     text = font.render(text, True, BLACK)
     screen.blit(text, pos)

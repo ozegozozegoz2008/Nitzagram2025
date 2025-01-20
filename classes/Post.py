@@ -11,6 +11,7 @@ class Post:
         self.description = description
         self.likes_counter = likes_counter
         self.comments = comments
+        self.comments_display_index = 0
 
     def display(self):
         self.display_username()
@@ -34,13 +35,10 @@ class Post:
     def display_comments(self):
         position_index = self.comments_display_index
 
-        # If there are more than 4 comments, print "view more comments"
         if len(self.comments) > NUM_OF_COMMENTS_TO_DISPLAY:
             comment_font = pygame.font.SysFont('chalkduster.ttf', COMMENT_TEXT_SIZE)
             view_more_comments_button = comment_font.render("view more comments", True, LIGHT_GRAY)
             screen.blit(view_more_comments_button, (VIEW_MORE_COMMENTS_X_POS, VIEW_MORE_COMMENTS_Y_POS))
-
-        # Display 4 comments starting from comments_display_index
         for i in range(NUM_OF_COMMENTS_TO_DISPLAY):
             if position_index >= len(self.comments):
                 position_index = 0
@@ -51,23 +49,14 @@ class Post:
             screen.blit(comment_text, (FIRST_COMMENT_X_POS, comment_y_pos))
 
             position_index += 1
-        position_index = self.comments_display_index
-        # If there are more than 4 comments, print "view more comments"
-        if len(self.comments) > NUM_OF_COMMENTS_TO_DISPLAY:
-            comment_font = pygame.font.SysFont('chalkduster.ttf',
-                                               COMMENT_TEXT_SIZE)
-            view_more_comments_button = comment_font.render("view more comments",
-                                                            True, LIGHT_GRAY)
-            screen.blit(view_more_comments_button, (VIEW_MORE_COMMENTS_X_POS,
-                                                    VIEW_MORE_COMMENTS_Y_POS))
 
-        for i in range(0, len(self.comments)):
-            if position_index >= len(self.comments):
-                position_index = 0
-            self.comments[position_index].display(i)
-            position_index += 1
-            if i >= NUM_OF_COMMENTS_TO_DISPLAY - 1:
-                break
+    def update_comments_index(self, direction):
+        if direction == 'next':
+            if self.comments_display_index + NUM_OF_COMMENTS_TO_DISPLAY < len(self.comments):
+                self.comments_display_index += NUM_OF_COMMENTS_TO_DISPLAY
+        elif direction == 'previous':
+            if self.comments_display_index - NUM_OF_COMMENTS_TO_DISPLAY >= 0:
+                self.comments_display_index -= NUM_OF_COMMENTS_TO_DISPLAY
 
     def add_like(self):
         self.likes_counter += 1
