@@ -32,12 +32,25 @@ class Post:
         text_display(str(self.likes_counter), UI_FONT_SIZE, (LIKE_TEXT_X_POS, LIKE_BUTTON_Y_POS))
 
     def display_comments(self):
-        """
-        Display comments on post. In case there are more than 4
-        comments, show only 4 comments chosen by reset_comments_display_index
+        position_index = self.comments_display_index
 
-        :return: None
-        """
+        # If there are more than 4 comments, print "view more comments"
+        if len(self.comments) > NUM_OF_COMMENTS_TO_DISPLAY:
+            comment_font = pygame.font.SysFont('chalkduster.ttf', COMMENT_TEXT_SIZE)
+            view_more_comments_button = comment_font.render("view more comments", True, LIGHT_GRAY)
+            screen.blit(view_more_comments_button, (VIEW_MORE_COMMENTS_X_POS, VIEW_MORE_COMMENTS_Y_POS))
+
+        # Display 4 comments starting from comments_display_index
+        for i in range(NUM_OF_COMMENTS_TO_DISPLAY):
+            if position_index >= len(self.comments):
+                position_index = 0
+
+            comment_font = pygame.font.SysFont('chalkduster.ttf', COMMENT_TEXT_SIZE)
+            comment_text = comment_font.render(self.comments[position_index], True, BLACK)
+            comment_y_pos = FIRST_COMMENT_Y_POS + (i * COMMENT_LINE_HEIGHT)
+            screen.blit(comment_text, (FIRST_COMMENT_X_POS, comment_y_pos))
+
+            position_index += 1
         position_index = self.comments_display_index
         # If there are more than 4 comments, print "view more comments"
         if len(self.comments) > NUM_OF_COMMENTS_TO_DISPLAY:
@@ -48,7 +61,6 @@ class Post:
             screen.blit(view_more_comments_button, (VIEW_MORE_COMMENTS_X_POS,
                                                     VIEW_MORE_COMMENTS_Y_POS))
 
-        # Display 4 comments starting from comments_display_index
         for i in range(0, len(self.comments)):
             if position_index >= len(self.comments):
                 position_index = 0
