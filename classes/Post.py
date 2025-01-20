@@ -1,7 +1,7 @@
 import pygame
 
 from constants import *
-from helpers import screen
+from helpers import *
 
 
 class Post:
@@ -12,11 +12,24 @@ class Post:
         self.likes_counter = likes_counter
         self.comments = comments
 
-    def display(self, img_path, size=(POST_WIDTH, POST_HEIGHT), pos=(POST_X_POS, POST_Y_POS)):
-        image = pygame.image.load(img_path)
-        image = pygame.transform.scale(image, size)
-        screen.blit(image, pos)
+    def display(self):
+        self.display_username()
+        self.display_location()
+        self.display_description()
+        self.display_likes()
+        self.display_comments()
 
+    def display_username(self):
+        text_display(str(self.username), UI_FONT_SIZE, (USER_NAME_X_POS, USER_NAME_X_POS))
+
+    def display_location(self):
+        text_display(str(self.location), UI_FONT_SIZE, (LOCATION_TEXT_X_POS, LOCATION_TEXT_Y_POS))
+
+    def display_description(self):
+        text_display(str(self.description), UI_FONT_SIZE, (DESCRIPTION_TEXT_X_POS, DESCRIPTION_TEXT_Y_POS))
+
+    def display_likes(self):
+        text_display(str(self.likes_counter), UI_FONT_SIZE, (LIKE_TEXT_X_POS, LIKE_BUTTON_Y_POS))
 
     def display_comments(self):
         """
@@ -44,5 +57,8 @@ class Post:
             if i >= NUM_OF_COMMENTS_TO_DISPLAY - 1:
                 break
 
+    def add_like(self):
+        self.likes_counter += 1
 
-
+    def add_comment(self, text):
+        self.comments.append(text)
