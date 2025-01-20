@@ -1,8 +1,5 @@
-import pygame
-
-from constants import *
 from helpers import *
-from Post import Post
+from classes.Post import Post
 
 
 class TextPost(Post):
@@ -22,4 +19,3 @@ class TextPost(Post):
             text = font.render(self.text_arr[i], True, self.text_color)
             pos = center_text(n, text, i)
             screen.blit(text, pos)
-
