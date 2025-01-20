@@ -5,22 +5,17 @@ from helpers import screen
 
 
 class Post:
-    """
-    A class used to represent post on Nitzagram
-    """
-    def __init__(self): #TODO: add parameters
-        #TODO: write me!
-        pass
+    def __init__(self, username, location, description, likes_counter, comments):
+        self.username = username
+        self.location = location
+        self.description = description
+        self.likes_counter = likes_counter
+        self.comments = comments
 
-    def display(self):
-        """
-        Display the Post image/Text, description, location, likes and comments
-        on screen
-
-        :return: None
-        """
-        # TODO: write me!
-        pass
+    def display(self, img_path, size=(POST_WIDTH, POST_HEIGHT), pos=(POST_X_POS, POST_Y_POS)):
+        image = pygame.image.load(img_path)
+        image = pygame.transform.scale(image, size)
+        screen.blit(image, pos)
 
 
     def display_comments(self):
