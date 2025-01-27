@@ -18,7 +18,7 @@ class Post:
         self.display_comments()
 
     def display_username(self):
-        text_display(str(self.username), UI_FONT_SIZE, (USER_NAME_X_POS, USER_NAME_X_POS))
+        text_display(str(self.username), UI_FONT_SIZE, (USER_NAME_X_POS, USER_NAME_Y_POS))
 
     def display_location(self):
         text_display(str(self.location), UI_FONT_SIZE, (LOCATION_TEXT_X_POS, LOCATION_TEXT_Y_POS))
@@ -27,7 +27,7 @@ class Post:
         text_display(str(self.description), UI_FONT_SIZE, (DESCRIPTION_TEXT_X_POS, DESCRIPTION_TEXT_Y_POS))
 
     def display_likes(self):
-        text_display(str(self.likes_counter), UI_FONT_SIZE, (LIKE_TEXT_X_POS, LIKE_BUTTON_Y_POS))
+        text_display(str(self.likes_counter), UI_FONT_SIZE, (LIKE_TEXT_X_POS, LIKE_TEXT_Y_POS))
 
     def display_comments(self):
         """

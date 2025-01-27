@@ -1,5 +1,8 @@
-from Post import *
+from classes.Post import Post
 from constants import *
+import pygame
+
+from helpers import screen
 
 
 class ImagePost(Post):
